@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Automation</title>
+</head>
+<body>
+    <h1>Weather Data</h1>
+    <form id="weather-form">
+        <label for="city">City:</label>
+        <input type="text" id="city" value="London">
+        <button type="button" onclick="fetchWeather()">Get Weather</button><br>
+
+        <label for="Temperature">Temperature:</label>
+        <input type="text" id="Temperature" readonly><br>
+
+        <label for="Humidity">Humidity:</label>
+        <input type="text" id="Humidity" readonly><br>
+
+        <label for="Rainfall">Rainfall:</label>
+        <input type="text" id="Rainfall" readonly><br>
+    </form>
+
+    <script>
+        // JavaScript code as provided earlier
+        const apiKey = '1bffeac4e19307fa76afbe3e1af64e11'; // Replace with your actual API key
+
+        async function fetchWeather() {
+            const city = document.getElementById('city').value || 'London';
+            const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch weather data: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                if (!data.main) {
+                    throw new Error('Weather data is unavailable for the specified city.');
+                }
+
+                document.getElementById('Temperature').value = `${data.main.temp} °C`;
+                document.getElementById('Humidity').value = `${data.main.humidity} %`;
+                document.getElementById('Rainfall').value = data.rain ? `${data.rain['1h']} mm` : 'No rainfall';
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+                alert('Failed to fetch weather data. Please check the city name.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchWeather);
+    </script>
+</body>
+</html>
