@@ -76,7 +76,7 @@ cd crop-recommendation-system
 
 | Home Page | Prediction Page | Crop Recommendation Result |
 | --- | --- | --- |
-| ![Home Page](screenshots/home.png) | ![Prediction Page](screenshots/prediction.png) | ![Result Page](screenshots/result.png) |
+| ![Home Page](screenshots/home.png.png) | ![Prediction Page](screenshots/prediction.png.png) | ![Result Page](screenshots/result.png.png) |
 
 ---
 
